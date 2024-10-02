@@ -1,9 +1,10 @@
+import os
 import socket
 import time
 import requests
 
-# Public IP and port of the Nginx service
-nginx_service_ip = "18.212.116.251"
+# Get the public IP and port of the Nginx service from environment variables
+nginx_service_ip = os.getenv("NGINX_SERVICE_IP", "8.8.8.8")  # Default value if env variable is not set
 nginx_service_port = 30515
 
 def check_nginx():
