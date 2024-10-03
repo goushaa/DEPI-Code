@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: dns-resolver
-        image: goushaa/internal-dns-resolver
+        image: 522814709442.dkr.ecr.us-east-1.amazonaws.com/kady-docker-repo:latest
         imagePullPolicy: IfNotPresent
         env:
         - name: DNS_RESOLVE_INTERVAL_SECONDS
