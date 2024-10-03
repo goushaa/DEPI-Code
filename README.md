@@ -1,12 +1,12 @@
-# Nginx Health Check Script
+# DNS Resolver Script
 
-This Python script periodically checks the health of an Nginx service by sending HTTP requests to a specified IP address and port. It prints the response status code and a snippet of the response body.
+This Python script continuously resolves the internal DNS name of an Nginx service deployed in Kubernetes and prints the resolved IP address. The script runs in a loop, attempting to resolve the DNS at a configurable interval.
 
 ## Features
 
-- Checks the Nginx service health every 5 seconds.
-- Configurable IP address via an environment variable.
-- Prints the HTTP response status and a preview of the response body.
+- Resolves the DNS of the Nginx service inside a Kubernetes cluster.
+- Configurable resolution interval via an environment variable.
+- Prints the resolved IP address or an error message if the resolution fails.
 
 ## Requirements
 
@@ -17,22 +17,35 @@ sudo apt install python3
 
 ## Configuration
 
-Before running the script, you can set the environment variable `NGINX_SERVICE_IP` to specify the IP address of your Nginx service. If this variable is not set, it will default to `8.8.8.8`.
+You can configure the interval at which the DNS is resolved using the environment variable `DNS_RESOLVE_INTERVAL_SECONDS`. If this variable is not set, it defaults to 10 seconds.
 
 ### Setting the Environment Variable
 
-In your terminal, you can set the environment variable as follows:
+In your terminal, set the environment variable as follows:
 
 ```bash
-export NGINX_SERVICE_IP="your_new_ip_address"
+export DNS_RESOLVE_INTERVAL_SECONDS="5"
 ```
-Replace `your_new_ip_address` with the actual IP address of your Nginx service.
+Replace `5` with your desired interval (in seconds) for DNS resolution.
 
-## Usage
+### Docker Setup
 
-To run the script, use Python:
+If you plan to run this script in a Docker container, you can pass the environment variable like this:
 
 ```bash
-python3 nginx_health_check.py
+docker run -e DNS_RESOLVE_INTERVAL_SECONDS="5" goushaa/internal-dns-resolver
 ```
 
+## Applying the Deployment
+
+To deploy the DNS resolver, save the above YAML to a file named `dns-resolver-deployment.yaml`, and then apply it to your Kubernetes cluster:
+
+```bash
+kubectl apply -f dns-resolver-deployment.yaml
+```
+
+After deploying, you can check the logs of the DNS resolver pod to see the resolved IP addresses:
+
+```bash
+kubectl logs -l app=dns-resolver
+```

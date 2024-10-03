@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dns-resolver
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dns-resolver
+  template:
+    metadata:
+      labels:
+        app: dns-resolver
+    spec:
+      containers:
+      - name: dns-resolver
+        image: goushaa/internal-dns-resolver
+        imagePullPolicy: IfNotPresent
+        env:
+        - name: DNS_RESOLVE_INTERVAL_SECONDS
+          value: "5"
