@@ -19,3 +19,5 @@ spec:
         env:
         - name: DNS_RESOLVE_INTERVAL_SECONDS
           value: "5"
+      imagePullSecrets:
+      - name: ecr-secret    
