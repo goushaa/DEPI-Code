@@ -48,4 +48,4 @@ After deploying, you can check the logs of the DNS resolver pod to see the resol
 
 ```bash
 kubectl logs -l app=dns-resolver
-```
+``` 
