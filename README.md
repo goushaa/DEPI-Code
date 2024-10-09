@@ -44,7 +44,7 @@ To deploy the DNS resolver, save the above YAML to a file named `dns-resolver-de
 kubectl apply -f dns-resolver-deployment.yaml
 ```
 
-After deploying, you can check the logs of the DNS resolver pod to see the resolved IP addresses:
+After deploying, you can check the logs of the DNS resolver pod to see the resolved IP addresses: 
 
 ```bash
 kubectl logs -l app=dns-resolver
