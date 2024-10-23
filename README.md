@@ -1,4 +1,4 @@
-# DNS Resolver Script 
+# DNS Resolver Script
 
 This Python script continuously resolves the internal DNS name of an Nginx service deployed in Kubernetes and prints the resolved IP address. The script runs in a loop, attempting to resolve the DNS at a configurable interval.
 
